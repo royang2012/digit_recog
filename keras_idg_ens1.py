@@ -41,8 +41,10 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 
 # =======
 datagen = ImageDataGenerator(
+    rotation_range=0.1,
     width_shift_range=0.1,
     height_shift_range=0.1,
+    shear_range=0.1,
     zoom_range=0.1
 )
 
