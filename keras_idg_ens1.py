@@ -30,13 +30,19 @@ model.add(MaxPooling2D())
 model.add(Convolution2D(32, 3, 3, activation='relu'))
 model.add(MaxPooling2D())
 
+model.add(Convolution2D(64, 3, 3, activation='relu'))
+# model.add(MaxPooling2D())
+
+# model.add(Convolution2D(128, 3, 3, activation='relu'))
+
+
 model.add(Flatten())
 # model.summary()
 model.add(Dense(output_dim=128, activation='relu'))
 model.add(Dropout(0.5))
 
 model.add(Dense(output_dim=10, activation='softmax'))
-
+model.summary()
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 # =======
