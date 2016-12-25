@@ -30,27 +30,19 @@ model.add(MaxPooling2D())
 model.add(Convolution2D(32, 3, 3, activation='relu'))
 model.add(MaxPooling2D())
 
-model.add(Convolution2D(64, 3, 3, activation='relu'))
-# model.add(MaxPooling2D())
-
-# model.add(Convolution2D(128, 3, 3, activation='relu'))
-
-
 model.add(Flatten())
 # model.summary()
 model.add(Dense(output_dim=128, activation='relu'))
 model.add(Dropout(0.5))
 
 model.add(Dense(output_dim=10, activation='softmax'))
-model.summary()
+
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 # =======
 datagen = ImageDataGenerator(
-    rotation_range=0.1,
     width_shift_range=0.1,
     height_shift_range=0.1,
-    shear_range=0.1,
     zoom_range=0.1
 )
 
@@ -60,7 +52,8 @@ prob_lst = []
 for i in range(num_diz):  # change to 20
     prob = np.zeros([test_x.shape[0], 10])
     for j in range(12):
-        model.fit(datagen.flow(train_x, train_y, batch_size=64), nb_epoch=10)  # change to 10
+        model.fit(datagen.flow(train_x, train_y, batch_size=64),
+                            len(train_x), nb_epoch=10)  # change to 10
         prob += model.predict_proba(test_x)
     prob_lst.append(prob)
 # model.save('model_mnist.h5') # uncomment to save your network
