@@ -60,8 +60,7 @@ prob_lst = []
 for i in range(num_diz):  # change to 20
     prob = np.zeros([test_x.shape[0], 10])
     for j in range(12):
-        model.fit(datagen.flow(train_x, train_y, batch_size=64),
-                            len(train_x), nb_epoch=10)  # change to 10
+        model.fit(datagen.flow(train_x, train_y, batch_size=64), nb_epoch=10)  # change to 10
         prob += model.predict_proba(test_x)
     prob_lst.append(prob)
 # model.save('model_mnist.h5') # uncomment to save your network
